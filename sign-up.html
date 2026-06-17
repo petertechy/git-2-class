@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.4px;
+    }
+
+    .card-subtitle {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .form-label {
+      color: #cbd5e1;
+      font-weight: 500;
+      font-size: 0.875rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #f1f5f9;
+      padding: 0.65rem 1rem;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control::placeholder {
+      color: #475569;
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      color: #f1f5f9;
+    }
+
+    .form-control.is-valid {
+      border-color: #22c55e;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .form-control.is-invalid {
+      border-color: #ef4444;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .input-group-text {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #64748b;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .input-group-text:hover { color: #94a3b8; }
+
+    .input-group .form-control {
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+    }
+
+    /* Password strength bar */
+    .strength-bar {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .strength-fill {
+      height: 100%;
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.3s, background 0.3s;
+    }
+
+    .strength-label {
+      font-size: 0.75rem;
+      margin-top: 4px;
+      color: #64748b;
+    }
+
+    .form-check-input {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-check-input:checked {
+      background-color: #6366f1;
+      border-color: #6366f1;
+    }
+
+    .form-check-label {
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+
+    .form-check-label a {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .form-check-label a:hover { color: #818cf8; text-decoration: underline; }
+
+    .btn-signup {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
+      border-radius: 10px;
+      padding: 0.7rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.2px;
+      color: #fff;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-signup:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      color: #fff;
+    }
+
+    .btn-signup:active { transform: translateY(0); }
+
+    .divider-text {
+      color: #475569;
+      font-size: 0.8rem;
+      position: relative;
+    }
+
+    .divider-text::before,
+    .divider-text::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .divider-text::before { right: 100%; margin-right: 12px; }
+    .divider-text::after  { left: 100%;  margin-left: 12px; }
+
+    .btn-social {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.6rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-social:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #f1f5f9;
+    }
+
+    .signin-text {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    .signin-link {
+      color: #6366f1;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signin-link:hover { color: #818cf8; }
+
+    .invalid-feedback { font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container" style="max-width: 440px;">
+    <div class="card shadow-lg p-4 p-md-5">
+
+      <!-- Brand -->
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <div class="brand-logo">
+          <i class="bi bi-lightning-charge-fill text-white fs-5"></i>
+        </div>
+        <span class="brand-name">Swift Bank</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="card-title mb-1">Create your account</h1>
+      <p class="card-subtitle mb-4">Get started — it's free, no credit card needed.</p>
+
+      <!-- Form -->
+      <form id="signupForm" novalidate>
+
+        <!-- Name row -->
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <label for="firstName" class="form-label">First name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="John" required />
+            <div class="invalid-feedback">Required.</div>
+          </div>
+          <div class="col-6">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Doe" required />
+            <div class="invalid-feedback">Required.</div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" required autocomplete="email"/>
+          <div class="invalid-feedback">Enter a valid email address.</div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" placeholder="At least 8 characters" required autocomplete="new-password"/>
+            <span class="input-group-text" id="togglePassword">
+              <i class="bi bi-eye" id="eyeIcon"></i>
+            </span>
+          </div>
+          <!-- Strength indicator -->
+          <div class="strength-bar mt-2">
+            <div class="strength-fill" id="strengthFill"></div>
+          </div>
+          <div class="strength-label" id="strengthLabel"></div>
+          <div class="invalid-feedback d-block" id="passwordError" style="display:none!important;"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Repeat your password" required autocomplete="new-password"/>
+            <span class="input-group-text" id="toggleConfirm">
+              <i class="bi bi-eye" id="eyeIconConfirm"></i>
+            </span>
+          </div>
+          <div class="invalid-feedback" id="confirmError">Passwords do not match.</div>
+        </div>
+
+        <!-- Terms -->
+        <div class="mb-4 form-check">
+          <input type="checkbox" class="form-check-input" id="terms" required />
+          <label class="form-check-label" for="terms">
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+          <div class="invalid-feedback">You must agree before continuing.</div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-signup w-100 mb-4">
+          Create account
+        </button>
+
+        <!-- Divider -->
+        <div class="text-center mb-4">
+          <span class="divider-text">or sign up with</span>
+        </div>
+
+        <!-- Social Buttons -->
+        <div class="row g-2 mb-4">
+          <div class="col-6">
+            <button type="button" class="btn btn-social w-100 d-flex align-items-center justify-content-center gap-2">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Google
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-social w-100 d-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-github fs-6"></i>
+              GitHub
+            </button>
+          </div>
+        </div>
+
+        <!-- Sign In Link -->
+        <p class="text-center signin-text mb-0">
+          Already have an account? <a href="#" class="signin-link">Sign in</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- <script>
+    // Toggle password visibility
+    function toggleVisibility(toggleId, inputId, iconId) {
+      document.getElementById(toggleId).addEventListener('click', function () {
+        const input = document.getElementById(inputId);
+        const icon  = document.getElementById(iconId);
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.replace('bi-eye', 'bi-eye-slash');
+        } else {
+          input.type = 'password';
+          icon.classList.replace('bi-eye-slash', 'bi-eye');
+        }
+      });
+    }
+
+    toggleVisibility('togglePassword', 'password', 'eyeIcon');
+    toggleVisibility('toggleConfirm', 'confirmPassword', 'eyeIconConfirm');
+
+    // Password strength meter
+    document.getElementById('password').addEventListener('input', function () {
+      const val = this.value;
+      const fill  = document.getElementById('strengthFill');
+      const label = document.getElementById('strengthLabel');
+
+      let score = 0;
+      if (val.length >= 8)              score++;
+      if (/[A-Z]/.test(val))            score++;
+      if (/[0-9]/.test(val))            score++;
+      if (/[^A-Za-z0-9]/.test(val))     score++;
+
+      const levels = [
+        { pct: '0%',   color: 'transparent', text: '' },
+        { pct: '25%',  color: '#ef4444',     text: 'Weak' },
+        { pct: '50%',  color: '#f97316',     text: 'Fair' },
+        { pct: '75%',  color: '#eab308',     text: 'Good' },
+        { pct: '100%', color: '#22c55e',     text: 'Strong' },
+      ];
+
+      const lvl = val.length === 0 ? levels[0] : levels[score];
+      fill.style.width      = lvl.pct;
+      fill.style.background = lvl.color;
+      label.textContent     = lvl.text;
+      label.style.color     = lvl.color;
+    });
+
+    // Form validation
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form     = this;
+      const password = document.getElementById('password').value;
+      const confirm  = document.getElementById('confirmPassword');
+      const pwErr    = document.getElementById('passwordError');
+
+      // Password length check
+      if (password.length < 8) {
+        pwErr.textContent = 'Password must be at least 8 characters.';
+        pwErr.style.display = 'block';
+        document.getElementById('password').classList.add('is-invalid');
+      } else {
+        pwErr.style.display = 'none';
+        document.getElementById('password').classList.remove('is-invalid');
+      }
+
+      // Confirm match check
+      if (confirm.value !== password) {
+        confirm.classList.add('is-invalid');
+      } else {
+        confirm.classList.remove('is-invalid');
+      }
+
+      if (!form.checkValidity() || password.length < 8 || confirm.value !== password) {
+        form.classList.add('was-validated');
+        return;
+      }
+
+      // ✅ All good — handle submission here
+      alert('Account created successfully!');
+    });
+  </script> -->
+
+</body>
+</html>
